@@ -99,4 +99,11 @@ module.exports = (client, message, basePath) => {
 	{
 		message.reply(require('./commands/campaign.js').getCurrent());
 	}
+	
+	//switch to a different campaign
+	else if(msg.startsWith('!switch'))
+	{
+		let newCamp = msg.substring(8);
+		require('./commands/campaign.js').switchCamp(basePath, newCamp, message);
+	}
 };

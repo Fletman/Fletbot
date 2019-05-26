@@ -11,5 +11,29 @@ module.exports = {
 			"Use !generate [name] to create a new campaign";
 			
 		return output;
+	},
+	
+	switchCamp: function(basePath, newCamp, message)
+	{
+		//only DM role can switch campaign
+		if(!message.member.roles.find(r => r.name === "DM"))
+		{
+			message.reply("Only the DM can switch the campaign. Try asking them");
+			return;
+		}
+		
+		//check if campaign data exists before switching
+		fs.access(basePath + newCamp, (err) => {
+			if(err)
+			{
+				console.log(err);
+				message.reply("Failed to find campaign");
+				return;
+			}
+			
+			//update campaign
+			process.argv[2] = newCamp;
+			message.reply("Switched campaign to: " + newCamp);
+		});
 	}
 };
