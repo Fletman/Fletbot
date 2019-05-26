@@ -7,8 +7,8 @@ module.exports = {
 		process.argv.length == 3 ?
 			output = "Active campaign is: " + process.argv[2]:
 			output = "No active campagin.\n" +
-			"Use !switch [name] to set an active campagin or\n" +
-			"Use !generate [name] to create a new campaign";
+			"Use !generate [name] to create a new campaign\n" +
+			"Use !switch [name] to set an active campagin";
 			
 		return output;
 	},
