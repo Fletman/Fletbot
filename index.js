@@ -9,6 +9,9 @@ var basePath = fs.readFileSync('./campaigns_base', 'utf8');
 if(!basePath.endsWith('\\') && !basePath.endsWith('/'))
 {basePath += '/';}
 
+//homogenize folder name
+if(process.argv.length == 3)
+{process.argv[2] = process.argv[2].toLowerCase();}
 
 //read bot's client token
 const tokenPath = basePath + 'botToken';
