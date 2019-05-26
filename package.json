@@ -1,0 +1,19 @@
+{
+  "name": "Fletbot",
+  "version": "7.9.5",
+  "description": "Basic bot for enhancing a D&D experience through Discord",
+  "main": "index.js",
+  "scripts": {
+    "fletbot": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "discord.js": "^11.5.0",
+    "dotenv": "^8.0.0",
+    "fs": "0.0.1-security",
+    "request": "^2.88.0"
+  }
+}
