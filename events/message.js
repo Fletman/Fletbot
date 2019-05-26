@@ -12,8 +12,8 @@ const commands = "\n!roll [dice count] d [dice type] + [modifier (optional)]\t-\
 				 "\n!lore [subject]\t-\tSee what your character knows about a particular subject (type '!lore ?' for a list of subjects)\n" +
 				 "\n!song [artist] [song]\t-\tRequest a song from YouTube to play\n" +
 				 "\n!current\t-\tGet name of currently-active campaign\n" +
-				 "\n{WIP} !generate [name]\t-\tInitialize new campaign\n" + //TODO:
-				 "\n{WIP} !switch [name]\t-\tSwitch to a different existing campaign\n" + //TODO:
+				 "\n!generate [name]\t-\tInitialize new campaign\n" +
+				 "\n!switch [name]\t-\tSwitch to a different existing campaign\n" +
 				 "\nPlease note: Although requests must be made from a server channel, Fletbot answers may be sent to PM channels to avoid clogging main channels";
 
 module.exports = (client, message, basePath) => {
@@ -31,7 +31,7 @@ module.exports = (client, message, basePath) => {
 	//banter with Fletbot
 	if(msg.includes("fletbot") || message.isMemberMentioned(client.user))
 	{
-		if(msg.includes("who ") || msg.includes("who's") || msg.includes("what"))
+		if(msg.includes("who") || msg.includes("what"))
 		{
 			message.reply("\nI'm here to help manage this Discord server and streamline D&D sessions.\nType !help for a list of commands I can perform.");
 		}
@@ -105,5 +105,12 @@ module.exports = (client, message, basePath) => {
 	{
 		let newCamp = msg.substring(8);
 		require('./commands/campaign.js').switchCamp(basePath, newCamp, message);
+	}
+	
+	//generate files for a new campaign
+	else if(msg.startsWith('!generate'))
+	{
+		let newCamp = msg.substring(10);
+		require('./commands/campaign.js').generate(basePath, newCamp, classes, message);
 	}
 };
