@@ -59,8 +59,8 @@
   - Ex. ```!lookup item dungeoneer's pack```
   - Note: due to Discord's message size limit, messages can get a bit 'spammy'. Working on a better solution.
 - ```!lore [subject]``` | See what your character knows about a particular subject
-  - type ```!lore ?``` for a list of all subjects known to a character
   - Ex. ```!lore underdark```
+  - type ```!lore ?``` for a list of all subjects known to a character
 - ```!learn [class] [monster]``` | Allow a class to be able to look up stats of a monster
   - Use 'All' as the class argument to allow all players to access a monster's stats
   - Ex. ```!learn druid dire wolf```
@@ -69,6 +69,8 @@
   - Ex. ```!generate a heroic tale```
 - ```!switch [name]``` | Switch to a different existing campaign
   - Ex. ```!switch a heroic tale```
+- ```!song [artist] [song]``` | Play a song from YouTube
+  - Ex. ```!song queen don't stop me now```
 - Please note: Although commands must be made in a server channel, Fletbot answers may be sent to PM channels to avoid clogging main channels.
 
 ## Thank you for using Fletbot!
