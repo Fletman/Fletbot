@@ -76,7 +76,7 @@ module.exports = (client, message, basePath) => {
 	else if(msg.startsWith('!lookup'))
 	{
 		let eventHandler = require('./commands/lookup.js');
-		eventHandler(message, msg, path + 'Lore/');
+		eventHandler(message, msg, path + 'Lore/', classes);
 	}
 	
 	//add monster to list of knowns

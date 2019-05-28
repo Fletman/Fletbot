@@ -3,7 +3,7 @@ const dom = require('cheerio');
 const fs = require('fs');
 const helper = require('../helperFunctions.js');
 
-module.exports = (message, msg, path) => {
+module.exports = (message, msg, path, classes) => {
 	//can't handle requests in private channels
 	if(helper.pmChannel(message))
 	{return;}
