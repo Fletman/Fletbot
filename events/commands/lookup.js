@@ -7,6 +7,8 @@ module.exports = (message, msg, path, classes) => {
 	//can't handle requests in private channels
 	if(helper.pmChannel(message))
 	{return;}
+
+	console.log(msg);
 	
 	let words = msg.split(' ');
 	let type = words[1];
@@ -105,7 +107,7 @@ module.exports = (message, msg, path, classes) => {
 			return false;
 		});
 		
-		if(subject != pageTitle)
+		if(!pageTitle || subject != pageTitle.trim())
 		{
 			message.author.send("Invalid request");
 			console.log("'" + pageTitle + "' vs '" + subject + "'");
@@ -115,8 +117,6 @@ module.exports = (message, msg, path, classes) => {
 		$('h1').replaceWith('\n');
 		$('h2').replaceWith('\n');
 		$('h3').replaceWith('\n');
-		$('tr').replaceWith('\n');
-		$('td').replaceWith(' ');
 		let infoText = $('#pagecontent').text() + '\n' + $('#pageAttrs').text();
 	
 		//invalid request/failed lookup
@@ -132,8 +132,20 @@ module.exports = (message, msg, path, classes) => {
 		message.author.send("\n" + subject.toUpperCase() + ":\n");
 		for(var l in lines)
 		{
+			lines[l] = lines[l].trim();
 			if(lines[l].length > 0 && lines[l] != '\n')
-			{message.author.send("```" + lines[l] + "```");}
+			{
+				const msgSize = 1990; //max size of Discord message
+				
+				//if message too big, break into chunks
+				if(lines[l].length > msgSize)
+				{
+					helper.breakupMsg(lines[l], msgSize, message.author);
+				}
+				
+				else
+				{message.author.send("```" + lines[l] + "```");}				
+			}
 		}			
 	});
 };
