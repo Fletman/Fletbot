@@ -18,7 +18,7 @@ module.exports = {
 
 		for(var i = 0; i < files.length; i++)
 		{
-			if(files[i] == loreName)
+			if(files[i].split('.')[0] == loreName)
 			{
 				let file = fs.readFileSync(dPath + files[i], 'utf8');
 				let lines = file.split('\n');

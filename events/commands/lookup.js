@@ -7,8 +7,6 @@ module.exports = (message, msg, path, classes) => {
 	//can't handle requests in private channels
 	if(helper.pmChannel(message))
 	{return;}
-
-	console.log(msg);
 	
 	let words = msg.split(' ');
 	let type = words[1];

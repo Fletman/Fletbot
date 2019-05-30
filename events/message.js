@@ -29,7 +29,7 @@ module.exports = (client, message, basePath) => {
 	let msg = message.content.toLowerCase();
 	
 	//banter with Fletbot
-	if(msg.includes("fletbot") || message.isMemberMentioned(client.user))
+	if(msg.includes("fletbot"))
 	{
 		if(msg.includes("who") || msg.includes("what"))
 		{
