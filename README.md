@@ -61,6 +61,8 @@
 - ```!lore [subject]``` | See what your character knows about a particular subject
   - Ex. ```!lore underdark```
   - type ```!lore ?``` for a list of all subjects known to a character
+- ```!check``` | Check if there have been any updates to lore since the last check```
+  - Note: only checks as far back as beginning of process
 - ```!learn [class] [monster]``` | Allow a class to be able to look up stats of a monster
   - Use 'All' as the class argument to allow all players to access a monster's stats
   - Ex. ```!learn druid dire wolf```
@@ -71,6 +73,7 @@
   - Ex. ```!switch a heroic tale```
 - ```!song [artist] [song]``` | Play a song from YouTube
   - Ex. ```!song queen don't stop me now```
+- ```!kill``` | Terminate Fletbot
 - Please note: Although commands must be made in a server channel, Fletbot answers may be sent to PM channels to avoid clogging main channels.
 
 ## Thank you for using Fletbot!
