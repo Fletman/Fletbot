@@ -10,6 +10,7 @@ const commands = "\n!roll [dice count] d [dice type] + [modifier (optional)]\t-\
 				 "\n!lookup [type] [subject]\t-\tLookup a 5e subject on Roll20.net by type: spell/item/weapon/class/race/monster/misc\n" +
 				 "\n!learn [class] [monster]\t-\tAllow a class to learn the stats of a monster (set class to 'All' for public knowledge)\n" +
 				 "\n!lore [subject]\t-\tSee what your character knows about a particular subject (type '!lore ?' for a list of subjects)\n" +
+				 "\n!check\t-\tSee if there has been any additional lore added since last check\n" +
 				 "\n!song [artist] [song]\t-\tRequest a song from YouTube to play\n" +
 				 "\n!current\t-\tGet name of currently-active campaign\n" +
 				 "\n!generate [name]\t-\tInitialize new campaign\n" +
@@ -94,6 +95,12 @@ module.exports = (client, message, basePath) => {
 	{
 		let eventHandler = require('./commands/lore.js');
 		eventHandler(message, msg, path + 'Lore/');
+	}
+	
+	//check for any updates to lore
+	else if(msg === '!check')
+	{
+		require('./loreUpdate.js').notifyUpdates(message);
 	}
 	
 	//display name of currently active campaign

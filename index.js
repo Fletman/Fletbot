@@ -52,5 +52,5 @@ fs.readFile(tokenPath, 'utf8', (err, token) => {
 if(process.argv.length == 3)
 {
 	//still in testing; fs.watch is VERY unstable
-	//require('./events/loreUpdate.js').watchNewDir(client, basePath + process.argv[2]);
+	require('./events/loreUpdate.js').watchNewDir(client, basePath + process.argv[2]);
 }
