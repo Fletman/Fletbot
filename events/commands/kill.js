@@ -7,12 +7,15 @@ module.exports = (message) => {
 		return;
 	}
 	
-	//notify users of Fletbot's termination
-	message.channel.send("Fletbot will now be going offline");
-	
 	//tell process to exit naturally rather than immediately/forcibly closing
 	//TODO: double-check some things here, setting process exitcode doesn't work?
 	//process.exitCode = 0;
-	console.log(`Exiting with code ${process.exitCode}`);
-	process.exit(0); //this is temporary until more research done
+
+	try{
+		console.log("Fletbot exiting");
+		message.channel.send("Fletbot will now be going offline");
+	}
+	finally{
+		process.exit(0); //this is temporary
+	}
 };
