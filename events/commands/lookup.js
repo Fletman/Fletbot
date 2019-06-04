@@ -115,6 +115,7 @@ module.exports = (message, msg, path, classes) => {
 		$('h1').replaceWith('\n');
 		$('h2').replaceWith('\n');
 		$('h3').replaceWith('\n');
+		$('td').replaceWith('\t');
 		let infoText = $('#pagecontent').text() + '\n' + $('#pageAttrs').text();
 	
 		//invalid request/failed lookup

@@ -27,7 +27,7 @@ fs.readdir('./events/', (err, files) => {
 	//each Discord event has a corresponding js file to handle it, for the sake of cleanliness and my sanity
 	files.forEach((file, index) => {
 		//skip folders/files not event-named
-		if(file == 'commands' || file == 'helperFunctions.js')
+		if(file == 'commands' || file == 'helperFunctions.js' || file == 'loreUpdate.js')
 		{return;}
 	
 		//create event handler for each file corresponding to an event
@@ -47,3 +47,10 @@ fs.readFile(tokenPath, 'utf8', (err, token) => {
 	
 	client.login(token);
 });
+
+//listen for lore changes in active campaign
+if(process.argv.length == 3)
+{
+	//still in testing; fs.watch is VERY unstable
+	//require('./events/loreUpdate.js').watchNewDir(client, basePath + process.argv[2]);
+}

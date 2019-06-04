@@ -33,6 +33,10 @@ module.exports = {
 			
 			//update campaign
 			process.argv[2] = newCamp;
+			
+			//update lore change listener
+			//require('../loreUpdate.js').watchNewDir(message, basePath + newCamp);
+			
 			message.reply("Switching Active Campaign to: " + newCamp);
 		});
 	},

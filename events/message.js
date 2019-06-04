@@ -15,6 +15,7 @@ const commands = "\n!roll [dice count] d [dice type] + [modifier (optional)]\t-\
 				 "\n!generate [name]\t-\tInitialize new campaign\n" +
 				 "\n!switch [name]\t-\tSwitch to a different existing campaign\n" +
 				 "\n!source\t-\tView Fletbot's source code\n" +
+				 "\n!kill\t-\tTerminate Fletbot\n" +
 				 "\nPlease note: Although requests must be made from a server channel, Fletbot answers may be sent to PM channels to avoid clogging main channels";
 
 module.exports = (client, message, basePath) => {
@@ -120,4 +121,12 @@ module.exports = (client, message, basePath) => {
 	{
 		message.reply('https://github.com/Fletman/Fletbot');
 	}
+	
+	//terminate Fletbot process
+	else if(msg === '!kill')
+	{
+		let termination = require('./commands/kill.js');
+		termination(message);
+	}
+	
 };
