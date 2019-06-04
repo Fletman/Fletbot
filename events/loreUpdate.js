@@ -29,12 +29,12 @@ module.exports = {
 					
 			console.log(`${targetClass} has updated lore`);
 			
+			if(targetClass == 'All')
+			{targetClass = 'Everyone';}
+			
 			if(!changeList.includes(targetClass))
 			{
-				if(targetClass == 'All')
-				{changeList.push('everyone');}
-			
-				else if(targetClass == 'DM' || targetClass == 'Lore')
+				if(targetClass == 'DM' || targetClass == 'Lore')
 				{/*ignore*/}
 			
 				else
