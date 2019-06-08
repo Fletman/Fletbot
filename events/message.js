@@ -133,7 +133,7 @@ module.exports = (client, message, basePath) => {
 	else if(msg === '!kill')
 	{
 		let termination = require('./commands/kill.js');
-		termination(message);
+		termination(client, message);
 	}
 	
 };
