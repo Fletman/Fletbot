@@ -3,21 +3,17 @@ const dom = require('cheerio');
 const fs = require('fs');
 
 //user roles as D&D classes
+//TODO: retrieve this from list of Server Roles
 const classes = ['Barbarian', 'Bard', 'Cleric', 'Druid', 'Fighter', 'Monk', 'Paladin', 'Rogue', 'Sorcerer', 'Warlock', 'Wizard'];
 
 //command list, displayed on !help
-const commands = "\n!roll [dice count] d [dice type] + [modifier (optional)]\t-\tRoll dice\n" +
-				 "\n!lookup [type] [subject]\t-\tLookup a 5e subject on Roll20.net by type: spell/item/weapon/class/race/monster/misc\n" +
-				 "\n!learn [class] [monster]\t-\tAllow a class to learn the stats of a monster (set class to 'All' for public knowledge)\n" +
-				 "\n!lore [subject]\t-\tSee what your character knows about a particular subject (type '!lore ?' for a list of subjects)\n" +
-				 "\n!check\t-\tSee if there has been any additional lore added since last check\n" +
-				 "\n!song [artist] [song]\t-\tRequest a song from YouTube to play\n" +
-				 "\n!current\t-\tGet name of currently-active campaign\n" +
-				 "\n!generate [name]\t-\tInitialize new campaign\n" +
-				 "\n!switch [name]\t-\tSwitch to a different existing campaign\n" +
-				 "\n!source\t-\tView Fletbot's source code\n" +
-				 "\n!kill\t-\tTerminate Fletbot\n" +
-				 "\nPlease note: Although requests must be made from a server channel, Fletbot answers may be sent to PM channels to avoid clogging main channels";
+let commandList;
+fs.readFile('./events/commands/commandList.txt', 'utf8', (err, file) => {
+	if(err)
+	{throw err;}
+	
+	commandList = file;
+});	
 
 module.exports = (client, message, basePath) => {
 	//get campaign directory path
@@ -57,83 +53,84 @@ module.exports = (client, message, basePath) => {
 		}
 	}
 
-	//display command list
-	else if(msg === '!help')
-	{message.reply(commands);}
-
-	//roll dice
-	else if(msg.startsWith('!roll'))
+	else
 	{
-		let eventHandler = require('./commands/roll.js');
-		eventHandler(message, msg);
-	}
-
-	//get music video from youtube
-	else if(msg.startsWith('!song'))
-	{
-		let eventHandler = require('./commands/song.js');
-		eventHandler(message, msg);
-	}
+		let command = msg.split(' ')[0];
+		let eventHandler;
+		
+		switch(command)
+		{
+			case '!help': //display command list
+				message.reply(commandList);
+				
+				break;
+				
+			case '!roll': //roll dice
+				eventHandler = require('./commands/roll.js');
+				eventHandler(message, msg);
+				
+				break;
+				
+			case '!song': //get music video from youtube
+				eventHandler = require('./commands/song.js');
+				eventHandler(message, msg);
+		
+				break;
+				
+			case '!lookup': //lookup subject from Roll20.net
+				eventHandler = require('./commands/lookup.js');
+				eventHandler(message, msg, path + 'Lore/', classes);
+				
+				break;
+				
+			case '!learn': //add monster to list of knowns
+				eventHandler = require('./commands/learn.js');
+				eventHandler(message, msg, path + 'Lore/');
+		
+				break;
+			
+			case '!lore': //read lore from stored files
+				//TODO: maybe look into more accessible storage locations
+				eventHandler = require('./commands/lore.js');
+				eventHandler(message, msg, path + 'Lore/');
+				
+				break;
+				
+			case '!check': //check for any updates to lore
+				require('./loreUpdate.js').notifyUpdates(message);
+				
+				break;
+					
+			case '!current': //display name of currently active campaign
+				message.reply(require('./commands/campaign.js').getCurrent());
+				
+				break;
+				
+			case '!switch': //switch to a different campaign
+				let campSwitchTo = msg.substring(8);
+				require('./commands/campaign.js').switchCamp(basePath, campSwitchTo, message);
+				
+				break;
+				
+			case '!generate': //generate files for a new campaign
+				let newCamp = msg.substring(10);
+				require('./commands/campaign.js').generate(basePath, newCamp, classes, message);
+				
+				break;
 	
-	//lookup item from Roll20.net
-	else if(msg.startsWith('!lookup'))
-	{
-		let eventHandler = require('./commands/lookup.js');
-		eventHandler(message, msg, path + 'Lore/', classes);
+			case '!source': //link to repository
+				message.reply('https://github.com/Fletman/Fletbot');
+				
+				break;
+				
+			case '!kill': //terminate Fletbot
+				let termination = require('./commands/kill.js');
+				termination(client, message);
+				
+				break;
+				
+			default: //no command used, nothing to do here
+				return;
+		}
 	}
-	
-	//add monster to list of knowns
-	else if(msg.startsWith('!learn'))
-	{
-		let eventHandler = require('./commands/learn.js');
-		eventHandler(message, msg, path + 'Lore/');
-	}
-	
-	//read lore from files stored to OneDrive server
-	//TODO: maybe look into more accessible storage locations
-	else if(msg.startsWith('!lore'))
-	{
-		let eventHandler = require('./commands/lore.js');
-		eventHandler(message, msg, path + 'Lore/');
-	}
-	
-	//check for any updates to lore
-	else if(msg === '!check')
-	{
-		require('./loreUpdate.js').notifyUpdates(message);
-	}
-	
-	//display name of currently active campaign
-	else if(msg === '!current')
-	{
-		message.reply(require('./commands/campaign.js').getCurrent());
-	}
-	
-	//switch to a different campaign
-	else if(msg.startsWith('!switch'))
-	{
-		let newCamp = msg.substring(8);
-		require('./commands/campaign.js').switchCamp(basePath, newCamp, message);
-	}
-	
-	//generate files for a new campaign
-	else if(msg.startsWith('!generate'))
-	{
-		let newCamp = msg.substring(10);
-		require('./commands/campaign.js').generate(basePath, newCamp, classes, message);
-	}
-	
-	//link to repository
-	else if(msg === '!source')
-	{
-		message.reply('https://github.com/Fletman/Fletbot');
-	}
-	
-	//terminate Fletbot process
-	else if(msg === '!kill')
-	{
-		let termination = require('./commands/kill.js');
-		termination(client, message);
-	}
-	
 };

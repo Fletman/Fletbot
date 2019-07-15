@@ -1,0 +1,24 @@
+
+!roll [dice count] d [dice type] + [modifier (optional)]	-	Roll dice
+
+!lookup [type] [subject]	-	Lookup a 5e subject on Roll20.net by type: spell/item/weapon/class/race/monster/misc
+
+!learn [class] [monster]	-	Allow a class to learn the stats of a monster (set class to 'All' for public knowledge)
+
+!lore [subject]	-	See what your character knows about a particular subject (type '!lore ?' for a list of subjects)
+
+!check	-	See if there has been any additional lore added since last check
+
+!song [artist] [song]	-	Request a song from YouTube to play
+
+!current	-	Get name of currently-active campaign
+
+!generate [name]	-	Initialize new campaign
+
+!switch [name]	-	Switch to a different existing campaign
+
+!source	-	View Fletbot's source code
+
+!kill	-	Terminate Fletbot
+
+Please note: Although requests must be made from a server channel, Fletbot answers may be sent to PM channels to avoid clogging main channels
