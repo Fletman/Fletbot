@@ -7,6 +7,8 @@
 
 !lore [subject]	-	See what your character knows about a particular subject (type '!lore ?' for a list of subjects)
 
+!map [name]	-	Display an image of a map
+
 !check	-	See if there has been any additional lore added since last check
 
 !song [artist] [song]	-	Request a song from YouTube to play

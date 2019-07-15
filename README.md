@@ -30,11 +30,12 @@
   - Note: Creating a new campaign is covered under [bot commands](#commands)
 - Each campaign created within this directory will contain a Lore folder, within which there will be a folder for every class.
   - Note: At present, Fletbot only supports the core 5e classes. A future update may allow for custom/homebrew classes.
-- Each class's folder contains data that only a character of that class knows.
-  - To add a lore fact to a class, inside the class folder create a file whose name is the lore's name.
-  - To add information that will be available to all players, create a file in the All folder instead of a specific class.
-  - Each folder also contains a 'knowledge.txt' file. This file contains a list of all the monsters a character is able to see the stats of.
-    - See [bot commands](#commands) for adding monsters to these lists.
+  - Each class's folder contains data that only a character of that class knows.
+    - To add a lore fact to a class, inside the class folder create a file whose name is the lore's name.
+    - To add information that will be available to all players, create a file in the All folder instead of a specific class.
+    - Each folder also contains a 'knowledge.txt' file. This file contains a list of all the monsters a character is able to see the stats of.
+      - See [bot commands](#commands) for adding monsters to these lists.
+- The campaign directory also contains a Maps folder to store maps in any (Discord-supported) image format
 
 ## Running
 ### Startup
@@ -61,6 +62,8 @@
 - ```!lore [subject]``` | See what your character knows about a particular subject
   - Ex. ```!lore underdark```
   - type ```!lore ?``` for a list of all subjects known to a character
+- ```!map [name]``` | Load an image of a map
+  - Ex. ```!map Greenland```
 - ```!check``` | Check if there have been any updates to lore since the last check
   - Note: only checks as far back as beginning of process
 - ```!learn [class] [monster]``` | Allow a class to be able to look up stats of a monster

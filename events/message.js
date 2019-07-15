@@ -96,6 +96,13 @@ module.exports = (client, message, basePath) => {
 				
 				break;
 				
+			case '!map': //load image of map
+				//TODO: maybe look into more accessible storage locations
+				eventHandler = require('./commands/map.js');
+				eventHandler(path + 'Maps/', message);
+				
+				break;
+				
 			case '!check': //check for any updates to lore
 				require('./loreUpdate.js').notifyUpdates(message);
 				

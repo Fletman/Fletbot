@@ -59,6 +59,10 @@ module.exports = {
 		fs.mkdirSync(basePath + newCamp);
 		fs.mkdirSync(basePath + newCamp + "/Lore");
 		
+		fs.mkdir(basePath + newCamp + "/Maps", (err) => {
+			if(err) throw err;
+		});
+		
 		let lorePath = (basePath + newCamp + "/Lore/");
 		console.log("Generating files for:\n" + lorePath);
 		
