@@ -29,7 +29,7 @@
 - The path that was stored to campaigns_base is the directory that will contain all data for each created D&amp;D campaign
   - Note: Creating a new campaign is covered under [bot commands](#commands)
 - Each campaign created within this directory will contain a Lore folder, within which there will be a folder for every class.
-  - Note: At present, Fletbot only supports the core 5e classes. A future update may allow for custom/homebrew classes.
+  - Note: At present, Fletbot only supports the core 5e classes. A future update will allow for players to be differentiated by Discord server roles.
   - Each class's folder contains data that only a character of that class knows.
     - To add a lore fact to a class, inside the class folder create a file whose name is the lore's name.
     - To add information that will be available to all players, create a file in the All folder instead of a specific class.
